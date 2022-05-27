@@ -4,20 +4,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@3.0.2"></script>
+    <style>
+        .box {
+            padding : 100px 0;
+            width:400px;
+            text-align: center;
+            background:rgb(204, 178, 178);
+            margin:20px;
+            display:inline-block;
+        }
+        li {
+            list-style-type: none;
+            background-color: #EED;
+            margin: 30px 150px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        img {
+             width: 100px;
+            height: 150px;
+        }
+        ul, p, h3 {
+            margin: 0;
+            padding: 0;
+        }
+        li.fav {
+            background: rgb(255, 155, 197);
+            color: white;
+        }
+    </style>
     <title>Vue</title>
 </head>
 <body>
     <h1>Heloooooo</h1>
+   
     <div id="app">
+        <a  v-bind:href="url" >Best website ever</a>
         <div v-if="showbooks">
-            {{ Title }} {{ Msg }} {{age}}
+            <ul>
+                <li v-for="book in filteredbooks" :class="{fav : book.isFav}" @click="togglefav(book)">
+                    <h3>{{ book.Title }}</h3>
+                    <p>{{ book.author }}</p>
+                    <img :src="book.image"> 
+                </li>
+            </ul>
+            {{ url }}
         </div>
        
         <button @click="ToggleBooks">
             <span v-if="showbooks">Hide Books</span>
             <span v-if="!showbooks">show Books</span>
         </button>
-        
+        <br>
+        <div class="box" @mouseover="handleevent">mouseover</div>
+        <div class="box" @mouseleave="handleevent">mouse leave</div>
+        <div class="box" @dblclick="handleevent">double click</div>
+        <div class="box" @mousemove="handleMouseEvent">Mouse Move- {{ x }} - {{ y }}</div>
         
     <!-- <button v-on:click="age++">increase age</button>
     <button v-on:click="age--">decrease age</button>
